@@ -1,2 +1,2 @@
-# minimax
+# Minimax
 Algotithm Minimax in Java
