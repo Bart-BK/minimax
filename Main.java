@@ -5,17 +5,29 @@
  */
 package dama.minimax;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Prabhát
  */
 public class Main {
-
+    
+    static Tabuleiro tab = new Tabuleiro();
+    public static ArrayList<ArrayList<Tabuleiro.PECA>> tabuleiro = tab.inicializaTabuleiro();
+    static Minimax minimax = new Minimax();
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        try {
+            tab.mostrarTabuleiro(tabuleiro);
+            
+        } catch (Exception e) {
+            System.out.println("main :"+ e.getMessage());
+        }
     }
     
 }
