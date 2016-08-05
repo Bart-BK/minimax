@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Collections;
+
 public class IA20152ESQUELETOMINIMAX {
     
     final int tam = 8;
