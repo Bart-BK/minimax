@@ -807,27 +807,24 @@ public class IA20152ESQUELETOMINIMAX {
         ArrayList<ArrayList<ArrayList<Dama>>> tabu_filhos = null;
             
         try{
+            
+            tabu_filhos = this.movimentos_possiveis(tabu, cor_da_vez);
+            tabu_filhos.addAll(this.retalhacoes_possiveis(tabu, cor_da_vez));
+            Collections.shuffle(tabu_filhos);
+            novo_tabu = tabu_filhos.get(0);
+                
             //Caso base da recursão que pega o melhor tabuleiro para peça preta e o 
             //cenário com maior custo para o jogador
             if(profundidade == 0 || this.pecas(tabu) == 1){
                 if(cor_da_vez == Dama.PRETA){
-                    tabu_filhos = this.movimentos_possiveis(tabu, cor_da_vez);
-                    tabu_filhos.addAll(this.retalhacoes_possiveis(tabu, cor_da_vez));
-                    Collections.shuffle(tabu_filhos);
-                    novo_tabu = tabu_filhos.get(0);
-                    
                     for(int i = 1; i < tabu_filhos.size(); i++){
                         if(this.custo(novo_tabu, tabu) > this.custo(tabu_filhos.get(i), tabu)){
                             novo_tabu = tabu_filhos.get(i);
                         }
                     }
 
-                }else{
-                    tabu_filhos = this.movimentos_possiveis(tabu, cor_da_vez);
-                    tabu_filhos.addAll(this.retalhacoes_possiveis(tabu, cor_da_vez));
-                    Collections.shuffle(tabu_filhos);
-                    novo_tabu = tabu_filhos.get(0);
-                    
+                }
+                else{
                     for(int i = 1; i < tabu_filhos.size(); i++){
                         if(this.custo(novo_tabu, tabu) < this.custo(tabu_filhos.get(i), tabu)){
                             novo_tabu = tabu_filhos.get(i);
@@ -837,12 +834,6 @@ public class IA20152ESQUELETOMINIMAX {
             }
             //Melhor jogada para o computador
             else if(cor_da_vez == Dama.PRETA){
-                
-                tabu_filhos = this.movimentos_possiveis(tabu, cor_da_vez);
-                tabu_filhos.addAll(this.retalhacoes_possiveis(tabu, cor_da_vez));
-                Collections.shuffle(tabu_filhos);
-                novo_tabu = tabu_filhos.get(0);
-                
                 for(int i = 1; i < tabu_filhos.size(); i++){
                     if(this.custo(this.jogar_via_minimax(novo_tabu, Dama.BRANCA, profundidade-1), tabu) >
                             this.custo(this.jogar_via_minimax(tabu_filhos.get(i), Dama.BRANCA, profundidade-1), tabu)){
@@ -852,12 +843,6 @@ public class IA20152ESQUELETOMINIMAX {
             }
             //Pior jogada para o jogador adversário
             else if(cor_da_vez == Dama.BRANCA){
-                
-                tabu_filhos = this.movimentos_possiveis(tabu, cor_da_vez);
-                tabu_filhos.addAll(this.retalhacoes_possiveis(tabu, cor_da_vez));
-                Collections.shuffle(tabu_filhos);
-                novo_tabu = tabu_filhos.get(0);
-                
                 for(int i = 1; i < tabu_filhos.size(); i++){
                     if(this.custo(this.jogar_via_minimax(novo_tabu, Dama.PRETA, profundidade-1), tabu) < this.custo(this.jogar_via_minimax(tabu_filhos.get(i), Dama.PRETA, profundidade-1), tabu)){
                         novo_tabu = tabu_filhos.get(i);
