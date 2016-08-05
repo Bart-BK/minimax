@@ -10,5 +10,7 @@ package dama.minimax;
  * @author Prabhát
  */
 public class Minimax {
+    Tabuleiro tab = new Tabuleiro();
+    
     
 }
